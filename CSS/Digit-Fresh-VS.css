@@ -1,0 +1,188 @@
+/* ? Кастомный скроллбар */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f3f9fb;
+}
+::-webkit-scrollbar-thumb {
+  background: #378db3;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1e689d;
+}
+::-webkit-scrollbar-button {
+  background-color: #378db3;
+  height: 10px;
+}
+
+/* ! Общие */
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: sans-serif;
+  /* ! Тест */
+  height: 150vh;
+}
+h2 {
+  font-size: 30px;
+  text-transform: uppercase;
+  color: #1e689d;
+  margin-bottom: 45px;
+}
+h4 {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+h5 {
+  font-size: 16px;
+  color: #777777;
+  font-weight: lighter;
+}
+
+/* ! Видео-слайдер */
+.videos-slider-container {
+  background-color: #f3f9fb;
+  max-width: 100%;
+  min-width: 490px;
+}
+.adaptive-videos-slider {
+  width: 1430px;
+  max-width: 100%;
+  margin-inline: auto;
+  padding-bottom: 40px;
+  display: flex;
+}
+.vs-title-wrapper {
+  padding-top: 40px;
+  width: 1430px;
+  max-width: 100%;
+  margin-inline: auto;
+}
+.vs-title-wrapper h2 {
+  padding-left: 70px;
+}
+.vs-cards-container {
+  width: 1290px;
+  margin-inline: auto;
+  overflow: hidden;
+}
+/* .vs-cards-container h2 {
+  margin-bottom: 40px;
+} */
+.vs-cards-wrapper {
+  width: 204%;
+  display: flex;
+  transition: transform 0.2s;
+}
+
+.vs-card {
+  flex-basis: 33.33%; /* flex-basis: 470px; */
+  width: 410px;
+}
+.vs-card:hover {
+  cursor: pointer;
+}
+.vs-card-video {
+  height: 270px;
+  width: 410px;
+  user-select: none;
+  margin-bottom: 25px;
+}
+.vs-card-video * {
+  border-radius: 5px;
+  height: 270px;
+  width: 410px;
+}
+/* .vs-card-video {
+  background-image: url('SVG/play-button.svg');
+} */
+.vs-card-text {
+  height: 140px;
+  width: 410px;
+}
+.vs-card-text h4 {
+  margin-bottom: 5px;
+}
+.vs-card:hover h4 {
+  color: #1e689d;
+}
+.vs-card:hover h5 {
+  color: #1e1e1e;
+}
+.vs-hr-line {
+  width: 200px;
+  height: 1px;
+  margin-bottom: 6px;
+  background-color: #1e1e1e;
+  transition: width 0.2s ease-in-out;
+}
+.vs-card:hover .vs-hr-line {
+  width: 410px;
+  height: 3px;
+  margin-bottom: 4px;
+  background-color: #1e689d;
+  transition: width 0.1s ease-in-out;
+}
+
+.vs-pagination-container {
+  width: 220px;
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem auto;
+}
+.vs-pagination-bullet {
+  width: 20px;
+  height: 5px;
+  background: #777777;
+}
+.vs-pagination-bullet.active {
+  background: #1e1e1e;
+}
+
+.vs-prev-btn,
+.vs-next-btn {
+  padding-inline: 7px;
+  /* padding-inline: 6px; */
+  padding-block: 100px;
+  align-self: center;
+  user-select: none;
+}
+.vs-prev-btn:hover,
+.vs-next-btn:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+.vs-prev-btn:active,
+.vs-next-btn:active {
+  opacity: 1;
+}
+
+@media only screen and (max-width: 1360px) {
+  .adaptive-videos-slider {
+    width: 1100px;
+  }
+  .vs-cards-container {
+    width: 900px;
+  }
+  .vs-cards-wrapper {
+    width: 326%;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .vs-title-wrapper h2 {
+    padding-left: 45px;
+  }
+  .adaptive-videos-slider {
+    width: 800px;
+  }
+  .vs-cards-container {
+    width: 410px;
+  }
+  .vs-cards-wrapper {
+    width: 600%;
+  }
+}
