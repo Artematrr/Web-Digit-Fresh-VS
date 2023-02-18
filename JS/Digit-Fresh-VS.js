@@ -1,3 +1,5 @@
+// ! Video Slider Script
+// Global Constants
 const adaptiveVideosSlider = document.querySelector('.adaptive-videos-slider')
 const vsCardsWrapper = adaptiveVideosSlider.querySelector('.vs-cards-wrapper')
 const vsCards = vsCardsWrapper.querySelectorAll('.vs-card')
@@ -7,9 +9,7 @@ const vsPaginationBullets = adaptiveVideosSlider.querySelectorAll(
 const vsPrevBtn = adaptiveVideosSlider.querySelector('.vs-prev-btn')
 const vsNextBtn = adaptiveVideosSlider.querySelector('.vs-next-btn')
 
-let currentVsCard = 0
-
-// Move the cards
+// Cards Moving
 function moveVsCards() {
   vsCardsWrapper.style.transform = `translateX(-${
     currentVsCard * (100 / vsCards.length)
@@ -22,7 +22,38 @@ function moveVsCards() {
   })
 }
 
-// Рagination Bullets Count
+let currentVsCard = 0
+
+vsPrevBtn.addEventListener('click', () => {
+  vsBulletsCount()
+  if (currentVsCard > 0) {
+    currentVsCard--
+    moveVsCards()
+  } else if ((currentVsCard = -1)) {
+    currentVsCard = vsCards.length - vsCardsInRow
+    moveVsCards()
+  }
+})
+
+vsNextBtn.addEventListener('click', () => {
+  vsBulletsCount()
+  if (currentVsCard < vsCards.length - vsCardsInRow) {
+    currentVsCard++
+    moveVsCards()
+  } else {
+    currentVsCard = 0
+    moveVsCards()
+  }
+})
+
+vsPaginationBullets.forEach((bullet, index) => {
+  bullet.addEventListener('click', () => {
+    currentVsCard = index
+    moveVsCards()
+  })
+})
+
+// Change Рagination
 let vsBullet5 = document.getElementById('vs-bullet-5')
 let vsBullet6 = document.getElementById('vs-bullet-6')
 
@@ -42,46 +73,39 @@ function vsBulletsCount() {
   }
 }
 
-// Previous Button
-vsPrevBtn.addEventListener('click', () => {
-  vsBulletsCount()
-  if (currentVsCard > 0) {
-    currentVsCard--
-    moveVsCards()
-  } else if ((currentVsCard = -1)) {
-    currentVsCard = vsCards.length - vsCardsInRow
-    moveVsCards()
+// Swiper Slider
+function handleGesture() {
+  if (xTouchEnd <= xTouchStart) {
+    vsBulletsCount()
+    if (currentVsCard < vsCards.length - vsCardsInRow) {
+      currentVsCard++
+      moveVsCards()
+    } else {
+      currentVsCard = 0
+      moveVsCards()
+    }
   }
-})
 
-// Next Button
-vsNextBtn.addEventListener('click', () => {
-  vsBulletsCount()
-  if (currentVsCard < vsCards.length - vsCardsInRow) {
-    currentVsCard++
-    moveVsCards()
-  } else {
-    currentVsCard = 0
-    moveVsCards()
-  }
-})
-
-// Pagination Bullets
-vsPaginationBullets.forEach((bullet, index) => {
-  bullet.addEventListener('click', () => {
-    currentVsCard = index
-    moveVsCards()
-  })
-})
-
-// Wrpap Video Titles
-const vsPostTitle = document.getElementsByClassName('vs-post-title')
-let maxChars = 52
-
-for (let i of vsPostTitle) {
-  if (i.innerHTML.length > maxChars) {
-    if (i.innerHTML.charAt(maxChars - 1) === ' ') {
-      i.innerHTML = i.innerHTML.substring(0, maxChars - 1) + '...'
-    } else i.innerHTML = i.innerHTML.substring(0, maxChars) + '...'
+  if (xTouchEnd >= xTouchStart) {
+    vsBulletsCount()
+    if (currentVsCard > 0) {
+      currentVsCard--
+      moveVsCards()
+    } else if ((currentVsCard = -1)) {
+      currentVsCard = vsCards.length - vsCardsInRow
+      moveVsCards()
+    }
   }
 }
+
+let xTouchStart = 0
+let xTouchEnd = 0
+
+vsCardsWrapper.addEventListener('touchstart', (e) => {
+  xTouchStart = e.touches[0].clientX
+})
+
+vsCardsWrapper.addEventListener('touchend', (e) => {
+  xTouchEnd = e.changedTouches[0].clientX
+  handleGesture()
+})
