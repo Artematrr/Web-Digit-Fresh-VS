@@ -1,4 +1,4 @@
 # Web-Digit-Fresh-VS
-## See: https://legendary-gelato-f78787.netlify.app/
+## See: <a href="https://legendary-gelato-f78787.netlify.app//">Main Site</a> 
 ### Описание
 Кусочек для Цифровой газеты ПГУТИ
